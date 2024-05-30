@@ -12,7 +12,7 @@
 
     };
 
-    defaultTemplate = self.templates.trivial;
+    defaultTemplate = self.templates.devenv;
 
   };
 }
