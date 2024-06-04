@@ -1,9 +1,10 @@
 {
-  inputs.nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
-  inputs.poetry2nix.url = "github:nix-community/poetry2nix";
-  inputs.nix-bundle.url = "github:NixOS/bundlers";
-
-  inputs.utils.url = "github:numtide/flake-utils";
+  inputs = {
+    nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
+    poetry2nix.url = "github:nix-community/poetry2nix";
+    nix-bundle.url = "github:NixOS/bundlers";
+    utils.url = "github:numtide/flake-utils";
+  };
 
   outputs = {
     self,
@@ -19,7 +20,8 @@
         inherit (poetry2nix.lib.mkPoetry2Nix {pkgs = pkgs;}) mkPoetryApplication defaultPoetryOverrides mkPoetryEnv;
 
         # Fix from https://github.com/nix-community/poetry2nix/blob/8ffbc64abe7f432882cb5d96941c39103622ae5e/docs/edgecases.md#modulenotfounderror-no-module-named-packagename
-        pypkgs-build-requirements = { # <- Setup here the package name with the required dependency in case of ModuleNotFoundError
+        pypkgs-build-requirements = {
+          # <- Setup here the package name with the required dependency in case of ModuleNotFoundError
           mamba = ["setuptools"];
           doublex = ["setuptools"];
           doublex-expects = ["setuptools"];
@@ -56,13 +58,13 @@
 
         devShells = {
           default = pkgs.mkShellNoCC {
-            packages = with pkgs; [
+            packages = [
               (mkPoetryEnv {
                 projectDir = self;
                 python = pythonVersion;
                 overrides = p2n-overrides;
               })
-              poetry
+              pkgs.poetry
             ];
           };
         };
@@ -71,4 +73,3 @@
       }
     );
 }
-
