@@ -16,7 +16,7 @@
         };
       in
         with pkgs; {
-          devShell = mkShell {
+          devShells.default = mkShell {
             buildInputs = [
               # Add here dependencies for the project.
             ];

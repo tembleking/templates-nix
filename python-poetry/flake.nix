@@ -56,17 +56,15 @@
           rpm = nix-bundle.bundlers.${system}.toRPM drv; # command: nix build .#rpm
         };
 
-        devShells = {
-          default = pkgs.mkShellNoCC {
-            packages = [
-              (mkPoetryEnv {
-                projectDir = self;
-                python = pythonVersion;
-                overrides = p2n-overrides;
-              })
-              pkgs.poetry
-            ];
-          };
+        devShells.default = pkgs.mkShellNoCC {
+          packages = [
+            (mkPoetryEnv {
+              projectDir = self;
+              python = pythonVersion;
+              overrides = p2n-overrides;
+            })
+            pkgs.poetry
+          ];
         };
 
         formatter = pkgs.alejandra;
