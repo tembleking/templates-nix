@@ -15,14 +15,14 @@
           config.allowUnfree = true;
         };
       in
-        with pkgs; {
-          devShells.default = mkShell {
+        {
+          devShells.default = with pkgs; mkShell {
             buildInputs = [
               # Add here dependencies for the project.
             ];
           };
 
-          formatter = alejandra;
+          formatter = pkgs.alejandra;
         }
     );
 }
