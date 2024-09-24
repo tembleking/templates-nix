@@ -9,31 +9,33 @@
     };
   };
 
-  outputs = {
-    self,
-    nixpkgs,
-    nixos-generators,
-    ...
-  } @ inputs: let
-    system = "x86_64-linux";
-    pkgs = import nixpkgs {
-      inherit system;
-      config.allowUnfree = true;
-    };
-    generateFor = format:
-      nixos-generators.nixosGenerate {
-        inherit system format;
-        specialArgs = inputs;
-        modules = [
-          ./configuration.nix
-        ];
+  outputs =
+    {
+      self,
+      nixpkgs,
+      nixos-generators,
+      ...
+    }@inputs:
+    let
+      system = "x86_64-linux";
+      pkgs = import nixpkgs {
+        inherit system;
+        config.allowUnfree = true;
       };
-  in {
-    packages.${system} = rec {
-      gce = generateFor "gce";
-      default = gce;
-    };
+      generateFor =
+        format:
+        nixos-generators.nixosGenerate {
+          inherit system format;
+          specialArgs = inputs;
+          modules = [ ./configuration.nix ];
+        };
+    in
+    {
+      packages.${system} = rec {
+        gce = generateFor "gce";
+        default = gce;
+      };
 
-    formatter = pkgs.alejandra;
-  };
+      formatter = pkgs.nixfmt-rfc-style;
+    };
 }

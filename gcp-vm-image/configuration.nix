@@ -3,7 +3,8 @@
   pkgs,
   config,
   ...
-}: {
+}:
+{
   # You can see all the available options at: https://search.nixos.org/options
 
   # Add overlays
@@ -17,7 +18,10 @@
   ];
 
   # Enable flakes.
-  nix.settings.experimental-features = ["nix-command" "flakes"];
+  nix.settings.experimental-features = [
+    "nix-command"
+    "flakes"
+  ];
 
   # Set the hostname for the machine.
   networking.hostName = "nixos-gcp";
@@ -34,7 +38,7 @@
   # Configure the root user.
   users.users.root = {
     # Add the public SSH key for the root user to allow SSH access.
-    openssh.authorizedKeys.keys = ["ssh-ed25519 AAAA....  user@nixos"];
+    openssh.authorizedKeys.keys = [ "ssh-ed25519 AAAA....  user@nixos" ];
   };
 
   # Configure network proxy if necessary
