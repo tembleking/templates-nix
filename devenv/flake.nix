@@ -23,10 +23,10 @@
           };
         in
         {
-          packages = with pkgs; {
-            inherit packageName;
-            default = packageName;
-          };
+          # packages = with pkgs; {
+          #   inherit packageName;
+          #   default = packageName;
+          # };
           devShells.default =
             with pkgs;
             mkShell {
