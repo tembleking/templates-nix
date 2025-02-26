@@ -1,9 +1,12 @@
 {
   python3Packages,
 }:
+let
+  pyproject = builtins.fromTOML (builtins.readFile ./pyproject.toml);
+in
 python3Packages.buildPythonApplication {
-  pname = "app";
-  version = "0.1.0";
+  pname = pyproject.project.name;
+  version = pyproject.project.version;
   src = ./.;
   pyproject = true;
 

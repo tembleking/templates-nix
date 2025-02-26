@@ -3,9 +3,12 @@
   setuptools,
   setuptools-scm,
 }:
+let
+  pyproject = builtins.fromTOML (builtins.readFile ./pyproject.toml);
+in
 buildPythonPackage {
-  pname = "my_lib";
-  version = "0.1.0";
+  pname = pyproject.project.name;
+  version = pyproject.project.version;
   src = ./.;
   pyproject = true;
 
@@ -18,5 +21,5 @@ buildPythonPackage {
     # your dependencies
   ];
 
-  pythonImportsCheck = [ "my_lib" ];
+  pythonImportsCheck = [ pyproject.project.name ];
 }
