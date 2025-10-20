@@ -3,6 +3,8 @@
 
 ### direnv ###
 .direnv
+.secrets
+result
 
 ### Linux ###
 *~
