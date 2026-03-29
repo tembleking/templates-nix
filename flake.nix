@@ -29,6 +29,11 @@
           path = ./python-uv-lib;
           description = "Python UV Library";
         };
+
+        rust = {
+          path = ./rust;
+          description = "Rust application";
+        };
       };
 
       defaultTemplate = self.templates.devenv;

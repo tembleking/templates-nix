@@ -1,0 +1,16 @@
+# direnv
+.direnv/
+.secrets
+result
+
+# Rust
+/target
+**/*.rs.bk
+*.pdb
+
+# macOS
+.DS_Store
+
+# IDE
+.idea/
+.vscode/

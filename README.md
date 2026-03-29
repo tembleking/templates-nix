@@ -22,6 +22,7 @@ All templates include [direnv](https://direnv.net/) integration via `.envrc` for
 | `python-uv-app` | Python application using [uv](https://github.com/astral-sh/uv). Builds with `buildPythonApplication`, includes a CLI entry point. |
 | `python-uv-lib` | Python library using uv. Builds with `buildPythonPackage`, includes `py.typed` marker and import checks. |
 | `python-poetry` | Python application using [Poetry](https://python-poetry.org/) via poetry2nix. Supports DEB/RPM bundling. |
+| `rust` | Rust application using `buildRustPackage`. Includes cargo, clippy, rust-analyzer, and rustfmt in the dev shell. |
 | `gcp-vm-image` | NixOS image for Google Cloud Platform via nixos-generators. Produces a `.tar.gz` ready for GCE upload. |
 
 ## Template details
@@ -58,6 +59,23 @@ Uses poetry2nix to build a Poetry-managed Python application. Includes bundler s
 nix build .#deb
 nix build .#rpm
 ```
+
+### rust
+
+Uses `rustPlatform.buildRustPackage` to build a Rust application. Package name and version are read from `Cargo.toml` via `builtins.fromTOML`.
+
+```
+├── flake.nix
+├── package.nix
+├── Cargo.toml
+├── Cargo.lock
+├── .envrc
+├── .gitignore
+└── src/
+    └── main.rs
+```
+
+The dev shell includes `cargo`, `clippy`, `rust-analyzer`, and `rustfmt`.
 
 ### gcp-vm-image
 
