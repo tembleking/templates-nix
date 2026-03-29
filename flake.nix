@@ -34,6 +34,11 @@
           path = ./rust;
           description = "Rust application";
         };
+
+        go = {
+          path = ./go;
+          description = "Go application";
+        };
       };
 
       defaultTemplate = self.templates.devenv;

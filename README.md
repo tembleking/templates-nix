@@ -23,6 +23,7 @@ All templates include [direnv](https://direnv.net/) integration via `.envrc` for
 | `python-uv-lib` | Python library using uv. Builds with `buildPythonPackage`, includes `py.typed` marker and import checks. |
 | `python-poetry` | Python application using [Poetry](https://python-poetry.org/) via poetry2nix. Supports DEB/RPM bundling. |
 | `rust` | Rust application using `buildRustPackage`. Includes cargo, clippy, rust-analyzer, and rustfmt in the dev shell. |
+| `go` | Go application using `buildGoModule`. Includes go, gopls, golangci-lint, and govulncheck in the dev shell. |
 | `gcp-vm-image` | NixOS image for Google Cloud Platform via nixos-generators. Produces a `.tar.gz` ready for GCE upload. |
 
 ## Template details
@@ -76,6 +77,23 @@ Uses `rustPlatform.buildRustPackage` to build a Rust application. Package name a
 ```
 
 The dev shell includes `cargo`, `clippy`, `rust-analyzer`, and `rustfmt`.
+
+### go
+
+Uses `buildGoModule` to build a Go application. Builds with CGO disabled and stripped binaries by default.
+
+```
+├── flake.nix
+├── package.nix
+├── go.mod
+├── .envrc
+├── .gitignore
+└── cmd/
+    └── app/
+        └── main.go
+```
+
+The dev shell includes `go`, `gopls`, `golangci-lint`, and `govulncheck`.
 
 ### gcp-vm-image
 
