@@ -39,6 +39,11 @@
           path = ./go;
           description = "Go application";
         };
+
+        cpp = {
+          path = ./cpp;
+          description = "C++ application with CMake";
+        };
       };
 
       defaultTemplate = self.templates.devenv;

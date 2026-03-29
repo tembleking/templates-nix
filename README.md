@@ -24,6 +24,7 @@ All templates include [direnv](https://direnv.net/) integration via `.envrc` for
 | `python-poetry` | Python application using [Poetry](https://python-poetry.org/) via poetry2nix. Supports DEB/RPM bundling. |
 | `rust` | Rust application using `buildRustPackage`. Includes cargo, clippy, rust-analyzer, and rustfmt in the dev shell. |
 | `go` | Go application using `buildGoModule`. Includes go, gopls, golangci-lint, and govulncheck in the dev shell. |
+| `cpp` | C++ application with CMake. Includes clang-tools in the dev shell. |
 | `gcp-vm-image` | NixOS image for Google Cloud Platform via nixos-generators. Produces a `.tar.gz` ready for GCE upload. |
 
 ## Template details
@@ -94,6 +95,22 @@ Uses `buildGoModule` to build a Go application. Builds with CGO disabled and str
 ```
 
 The dev shell includes `go`, `gopls`, `golangci-lint`, and `govulncheck`.
+
+### cpp
+
+Uses `stdenv.mkDerivation` with CMake to build a C++ application. Version includes the git commit via `self.shortRev`.
+
+```
+├── flake.nix
+├── package.nix
+├── CMakeLists.txt
+├── .envrc
+├── .gitignore
+└── src/
+    └── main.cc
+```
+
+The dev shell includes `clang-tools` (clangd, clang-format, etc.) and automatically runs `cmake -S . -B build` on entry via `inputsFrom` and `shellHook`.
 
 ### gcp-vm-image
 
