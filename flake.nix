@@ -5,9 +5,14 @@
     { self }:
     {
       templates = {
+        base = {
+          path = ./base;
+          description = "A very basic flake for development";
+        };
+
         devenv = {
           path = ./devenv;
-          description = "A very basic flake for development";
+          description = "A basic flake for development using devenv";
         };
 
         python-poetry = {
@@ -46,6 +51,6 @@
         };
       };
 
-      defaultTemplate = self.templates.devenv;
+      defaultTemplate = self.templates.base;
     };
 }
