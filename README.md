@@ -5,7 +5,7 @@ A collection of Nix flake templates for bootstrapping projects with reproducible
 ## Usage
 
 ```bash
-# Initialize with the default template (devenv)
+# Initialize with the default template (base)
 nix flake init -t github:tembleking/templates-nix
 
 # Initialize with a specific template
@@ -18,7 +18,8 @@ All templates include [direnv](https://direnv.net/) integration via `.envrc` for
 
 | Template | Description |
 |---|---|
-| `devenv` (default) | Minimal flake with a dev shell, overlay support, and formatter. Good starting point for any project. |
+| `base` (default) | Minimal flake with a dev shell, overlay support, and formatter. Good starting point for any project. |
+| `devenv` | Dev shell powered by [devenv](https://devenv.sh/), with overlay support and formatter. |
 | `python-uv-app` | Python application using [uv](https://github.com/astral-sh/uv). Builds with `buildPythonApplication`, includes a CLI entry point. |
 | `python-uv-lib` | Python library using uv. Builds with `buildPythonPackage`, includes `py.typed` marker and import checks. |
 | `python-poetry` | Python application using [Poetry](https://python-poetry.org/) via poetry2nix. Supports DEB/RPM bundling. |
@@ -29,9 +30,13 @@ All templates include [direnv](https://direnv.net/) integration via `.envrc` for
 
 ## Template details
 
+### base
+
+A bare-bones flake with nixpkgs and flake-utils. Provides an empty dev shell and overlay that you fill in as needed. Uses `nixfmt-tree` as the formatter.
+
 ### devenv
 
-A bare-bones flake with nixpkgs and flake-utils. Provides an empty dev shell and overlay that you fill in as needed.
+Same layout as `base`, but the dev shell is built with [devenv](https://devenv.sh/) via `devenv.lib.mkShell`. Configure packages, languages, services, and processes through devenv modules. See the [devenv option reference](https://devenv.sh/reference/options/).
 
 ### python-uv-app / python-uv-lib
 
