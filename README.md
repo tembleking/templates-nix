@@ -26,7 +26,8 @@ All templates include [direnv](https://direnv.net/) integration via `.envrc` for
 | `rust` | Rust application using `buildRustPackage`. Includes cargo, clippy, rust-analyzer, and rustfmt in the dev shell. |
 | `go` | Go application using `buildGoModule`. Includes go, gopls, golangci-lint, and govulncheck in the dev shell. |
 | `cpp` | C++ application with CMake. Includes clang-tools in the dev shell. |
-| `gcp-vm-image` | NixOS image for Google Cloud Platform via nixos-generators. Produces a `.tar.gz` ready for GCE upload. |
+| `vm-image-gcp` | NixOS image for Google Cloud Platform using the native nixpkgs image builder (`system.build.images`). Produces a `.raw.tar.gz` ready for GCE upload (x86_64 and aarch64). |
+| `vm-image-aws` | NixOS AMI for AWS EC2 using the native nixpkgs image builder (`system.build.images`). Produces a `.vhd` ready for EBS snapshot import (x86_64 and aarch64). |
 
 ## Template details
 
@@ -117,9 +118,13 @@ Uses `stdenv.mkDerivation` with CMake to build a C++ application. Version includ
 
 The dev shell includes `clang-tools` (clangd, clang-format, etc.) and automatically runs `cmake -S . -B build` on entry via `inputsFrom` and `shellHook`.
 
-### gcp-vm-image
+### vm-image-gcp
 
-Generates a NixOS image for Google Compute Engine. See [gcp-vm-image/README.md](./gcp-vm-image/README.md) for the full build and deploy workflow.
+Generates a NixOS image for Google Compute Engine, for both `x86_64-linux` and `aarch64-linux` (T2A/C4A). See [vm-image-gcp/README.md](./vm-image-gcp/README.md) for the full build and deploy workflow.
+
+### vm-image-aws
+
+Generates a NixOS AMI for AWS EC2, for both `x86_64-linux` and `aarch64-linux` (Graviton). See [vm-image-aws/README.md](./vm-image-aws/README.md) for the full build, import and launch workflow.
 
 ## Formatting
 

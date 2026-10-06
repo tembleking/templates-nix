@@ -20,9 +20,14 @@
           description = "A basic template for Python applications managed with poetry";
         };
 
-        gcp-vm-image = {
-          path = ./gcp-vm-image;
+        vm-image-gcp = {
+          path = ./vm-image-gcp;
           description = "NixOS configuration for GCP VM Image creation";
+        };
+
+        vm-image-aws = {
+          path = ./vm-image-aws;
+          description = "NixOS configuration for AWS EC2 AMI creation";
         };
 
         python-uv-app = {
